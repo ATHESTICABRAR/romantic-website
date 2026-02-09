@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proposal 💍</title>
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3);
+      font-family:'Segoe UI',cursive;
+      color:white;
+      overflow:hidden;
+    }
+
+    .card{
+      background:rgba(255,255,255,.25);
+      backdrop-filter:blur(15px);
+      padding:65px 55px;
+      border-radius:45px;
+      text-align:center;
+      box-shadow:0 35px 70px rgba(255,0,80,0.5);
+      animation: float 5s ease-in-out infinite, fadeIn 2s ease;
+      max-width:650px;
+    }
+
+    h1{
+      font-size:44px;
+      margin-bottom:35px;
+      text-shadow:0 6px 25px rgba(255,0,80,0.7);
+      animation: heartbeat 2s infinite;
+    }
+
+    .btn{
+      display:inline-block;
+      margin:14px;
+      padding:16px 50px;
+      border-radius:50px;
+      background:linear-gradient(135deg,#ff4f7b,#ff85a2);
+      color:white;
+      font-weight:bold;
+      text-decoration:none;
+      font-size:19px;
+      box-shadow:0 14px 35px rgba(255,0,80,0.6);
+      transition:0.3s;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      transform:scale(1.2);
+    }
+
+    .heart{
+      position:absolute;
+      bottom:-20px;
+      font-size:24px;
+      color:rgba(255,255,255,0.95);
+      animation: rise 7s linear infinite;
+    }
+
+    .confetti{
+      position:absolute;
+      top:-10px;
+      font-size:20px;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes rise{
+      0%{transform:translateY(0) scale(1);opacity:1;}
+      100%{transform:translateY(-120vh) scale(2);opacity:0;}
+    }
+
+    @keyframes fall{
+      0%{transform:translateY(0) rotate(0);opacity:1;}
+      100%{transform:translateY(120vh) rotate(360deg);opacity:0;}
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-16px);}
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:scale(0.7);}
+      to{opacity:1;transform:scale(1);}
+    }
+
+    @keyframes heartbeat{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.08);}
+      100%{transform:scale(1);}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1 id="text">Will you be mine forever? 💍❤️</h1>
+
+    <div>
+      <div class="btn" onclick="yes()">YES 💖</div>
+      <div class="btn" id="noBtn" onmouseover="runAway()">NO 😢</div>
+    </div>
+  </div>
+
+  <script>
+    function yes(){
+      document.getElementById("text").innerHTML =
+      "She said YES 😭💖<br>Forever starts now 💍✨";
+
+      for(let i=0;i<40;i++){
+        createConfetti();
+      }
+    }
+
+    function runAway(){
+      const btn=document.getElementById("noBtn");
+      btn.style.position="absolute";
+      btn.style.left=Math.random()*80+"vw";
+      btn.style.top=Math.random()*80+"vh";
+    }
+
+    function createHeart(){
+      const heart=document.createElement("div");
+      heart.className="heart";
+      heart.innerHTML="❤";
+      heart.style.left=Math.random()*100+"vw";
+      heart.style.animationDuration=(Math.random()*3+3)+"s";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),6000);
+    }
+
+    function createConfetti(){
+      const c=document.createElement("div");
+      c.className="confetti";
+      c.innerHTML="✨";
+      c.style.left=Math.random()*100+"vw";
+      c.style.animationDuration=(Math.random()*2+2)+"s";
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),4000);
+    }
+
+    setInterval(createHeart,300);
+  </script>
+
+</body>
+</html>
